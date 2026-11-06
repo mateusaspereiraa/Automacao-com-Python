@@ -1,0 +1,8 @@
+{
+  "url": "https://dlp.hashtagtreinamentos.com/python/intensivao/login",
+  "campo_email": [816, 387],
+  "campo_codigo": [807, 292],
+  "pausa": 0.3,
+  "espera_site": 5,
+  "scroll": 5000
+}

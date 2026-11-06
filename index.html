@@ -326,4 +326,32 @@ $("go").onclick=go;$("pa").onclick=()=>{pause=!pause;$("pa").textContent=pause?"
 $("rs").onclick=()=>{tok++;run=false;pause=false;i=0;out=[];$("tb").innerHTML="";F.forEach(f=>$("i_"+f[0]).value="");$("st").innerHTML='Pronto: <span id="n"></span> produtos na fila.';ui()};
 $("ex").onclick=()=>{const s=F.map(f=>f[0]).join(",")+"\n"+out.map(r=>F.map(f=>r[f[0]]||"").join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([s],{type:"text/csv"}));a.download="produtos_cadastrados.csv";a.click()};
 $("up").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{$("rs").click();rows=parse(t);ui()})};ui();
-</script></body></html>
+</script><script id="gate-logo">window.GATE_LOGO={"n": "Automação com Python"};</script>
+<script id="login-gate">
+(function(){
+ var K="pm_users",S="pm_session",d=document;
+ function ld(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}}
+ function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+ async function hs(t){try{var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("pm::"+t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}catch(e){return btoa(unescape(encodeURIComponent("pm::"+t)))}}
+ function css(){var s=d.createElement("style");s.textContent="#lg .lgi{display:block;max-height:64px;max-width:220px;margin:0 auto 6px;object-fit:contain;border-radius:8px}#lg .lgn{text-align:center;font-weight:800;font-size:1.2rem;margin-bottom:10px;letter-spacing:.02em}#lg{position:fixed;inset:0;z-index:2147483647;background:rgba(10,16,24,.94);display:flex;align-items:center;justify-content:center;padding:16px;font:15px/1.5 system-ui,sans-serif}#lg .c{background:#fff;color:#14202c;border-radius:14px;padding:22px;width:min(360px,100%);box-shadow:0 20px 60px rgba(0,0,0,.4)}#lg h2{margin:0 0 4px;font-size:1.25rem}#lg p{margin:0 0 12px;color:#5a6878;font-size:.9rem}#lg .t{display:flex;gap:6px;margin-bottom:12px}#lg .t button{flex:1;padding:8px;border:1px solid #c9d3de;background:#fff;border-radius:8px;cursor:pointer;font:inherit;font-weight:600;color:#14202c}#lg .t button.on{background:#2354e6;color:#fff;border-color:#2354e6}#lg input{width:100%;padding:10px;margin:5px 0;border:1px solid #c9d3de;border-radius:8px;font:inherit;color:#14202c;background:#fff}#lg .go{width:100%;margin-top:8px;padding:11px;border:0;border-radius:8px;background:#2354e6;color:#fff;font:inherit;font-weight:700;cursor:pointer}#lg .e{color:#c0392b;min-height:1.3em;font-size:.85rem;margin-top:6px}#lgo{position:fixed;top:8px;right:8px;z-index:2147483646;padding:6px 10px;border:0;border-radius:8px;background:rgba(20,32,44,.85);color:#fff;font:600 12px system-ui,sans-serif;cursor:pointer}";var L=window.GATE_LOGO||{};if(L.c)s.textContent+="#lg .go,#lg .t button.on{background:"+L.c+";border-color:"+L.c+"}#lg .lgn span{color:"+L.c+"}";d.head.appendChild(s)}
+ function out(){var o=d.getElementById("lgo");if(o)o.remove()}
+ function sair(){localStorage.removeItem(S);location.reload()}
+ function ok(em){var g=d.getElementById("lg");if(g)g.remove();d.documentElement.style.overflow="";var b=d.createElement("button");b.id="lgo";b.textContent="Sair ("+em+")";b.onclick=sair;d.body.appendChild(b)}
+ function lgLogo(){var L=window.GATE_LOGO||{};return (L.img?'<img class="lgi" src="'+L.img+'" alt="Logotipo" onerror="this.style.display=\'none\'">':"")+(L.n?'<div class="lgn">'+L.n+"</div>":"")}
+ function show(){css();d.documentElement.style.overflow="hidden";var m="in",g=d.createElement("div");g.id="lg";
+  g.innerHTML='<div class="c">'+lgLogo()+'<h2>Acesso ao sistema</h2><p>Entre com sua conta ou crie uma nova.</p><div class="t"><button class="on" data-m="in">Entrar</button><button data-m="up">Criar conta</button></div><input id="lge" type="email" placeholder="E-mail" autocomplete="username"><input id="lgp" type="password" placeholder="Senha (mín. 6 caracteres)" autocomplete="current-password"><div class="e" id="lgx"></div><button class="go" id="lgb">Entrar</button></div>';
+  d.body.appendChild(g);var x=g.querySelector("#lgx");
+  g.querySelectorAll(".t button").forEach(function(b){b.onclick=function(){m=b.dataset.m;g.querySelectorAll(".t button").forEach(function(o){o.classList.toggle("on",o===b)});g.querySelector("#lgb").textContent=m==="in"?"Entrar":"Criar conta";x.textContent=""}});
+  async function sub(){var em=g.querySelector("#lge").value.trim().toLowerCase(),pw=g.querySelector("#lgp").value,u=ld(K)||{};
+   if(!/^\S+@\S+\.\S+$/.test(em)){x.textContent="Digite um e-mail válido.";return}
+   if(pw.length<6){x.textContent="A senha precisa ter ao menos 6 caracteres.";return}
+   var h=await hs(em+pw);
+   if(m==="up"){if(u[em]){x.textContent="Este e-mail já tem conta. Use Entrar.";return}u[em]=h;sv(K,u)}
+   else if(!u[em]||u[em]!==h){x.textContent=u[em]?"Senha incorreta.":"Conta não encontrada. Use Criar conta.";return}
+   sv(S,{e:em});ok(em)}
+  g.querySelector("#lgb").onclick=sub;g.addEventListener("keydown",function(e){if(e.key==="Enter")sub()})}
+ function start(){var s=ld(S);if(s&&s.e){css();ok(s.e)}else show()}
+ if(d.body)start();else d.addEventListener("DOMContentLoaded",start)
+})();
+</script>
+</body></html>
